@@ -84,13 +84,13 @@ li a .front, .a-text{
 }
 
 .front{
-    background-color: #34465d;
-    color: #FFFC00;
+    background-color: #fff;
+    /* color: #FFFC00; */
     transform-origin: 0 0;
 }
 
 .a-text {
-    background-color: #FFFC00;
+    /* background-color: #FFFC00; */
     color: #34465d;
     transform-origin: 0 0 85px;
     transform: rotateX(90deg);
