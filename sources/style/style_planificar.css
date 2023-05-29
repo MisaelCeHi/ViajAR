@@ -1,1 +1,75 @@
 @import "./variables.css";
+
+main {
+    margin: 24px 40px;
+}
+h1 {
+    margin: 16px 0;
+}
+
+.form-container {
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 24, 51);
+        border-radius: 24px;
+        padding: 24px;
+        /* margin-left: 32px;
+        margin-right: 32px; */
+        box-shadow: rgba(0, 0, 0, 0.03) 0px -1px 0px 0px, rgba(0, 0, 0, 0.16) 0px 2px 8px 0px, rgba(0, 0, 0, 0.16) 0px 10px 8px -5px, rgba(0, 0, 0, 0.16) 0px 12px 32px -2px;
+}
+form {
+    display: flex;
+    flex-wrap: wrap;
+}
+.w-100 {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.w-50 {
+    width: 50%;
+    height: 84px;
+    padding: 12px;
+}
+.w-25 {
+    width: 25%;
+    padding: 12px;
+}
+
+input {
+    border: none;
+}
+.trans-28{
+    transform: translate(45px, 26px);
+    font-size: var(--thin);
+}
+.border-1 {
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 0 12px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    height: 60px;
+}
+
+.border-1 label{
+    width: 24px;
+}
+.border-1 input {
+    padding-left: 8px;
+    font-size: var(--md);
+}
+
+.flx {
+    display: flex;
+    /* border-right: .05px solid black; */
+}
+.pt-4 {
+    padding-top: 4px;
+}
+
+i {
+    font-size: var(--lg);
+    font-weight: bold !important; 
+}

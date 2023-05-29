@@ -12,45 +12,76 @@
     <script src="./sources/script/insert-nav.js"></script>
     <main>
         <h1>Arma tu paquete</h1>
-        <form autocomplete="off" id="myForm">
-            <h3>Selecciona tu destino</h3>
-    
-            <label for="origen">Salgo de</label>
-            <input name="departure" type="text" data-code="" id="origen" placeholder="ingresa una ciudad" required aria-required="true">
-            <label for="destino">Destino</label>
-            <input name="arrival" type="text" data-code=""  id="destino" placeholder="ingresa una ciudad" required aria-required="true">
-    
-            <label for="startDate">Fecha Inicio</label>
-            <input name="startDate" type="date" id="startDate" required aria-required="true">
-            <div id="endDate-container" style="display: none;">
-                <label for="endDate">Fecha Retorno</label>
-                <input name="endDate" type="date" id="endDate">
-            </div>
-    
-            <label for="cantidad">Personas</label>
-            <input type="text" id="cantidad" readonly="readonly" onclick="selectCantidadPersonas()" value="Adultos: 1" required aria-required="true">
-            <!-- <label for="rooms">Habitacion</label>
-            <input type="text" id="rooms" readonly="readonly"> -->
-            <select name="itinerary_type" id="itinerary_type" required>
-                <option id="one_way" value="one_way" selected>Un solo viaje</option>
-                <option id="round_trip" value="round_trip">Ida y vuelta</option>
-            </select>
-            
-            <div id="personas" style="display: none;">  
-                <label for="adultos">Adultos</label>
-                <input name="adults" type="number" id="adultos" min="1" value="1" required aria-required="true">
-                <label for="infantes">Niños</label>
-                <input name="children" type="number" id="infantes" min="0" value="0" required aria-required="true">
-                <button type="button" onclick="divPersonasDone()">Done</button>
-            </div>
-            <button type="submit">Buscar</button>
-        </form>
-        <div>
-            <ul id="autoCom"></ul>
-        </div>
-        <div>
+        <div class="form-container">
+            <form autocomplete="off" id="myForm">
+                <div class="w-100">
+                    <h3>Selecciona tu destino</h3>
+                </div>
+                <div class="w-50">
+                    <div class="border-1">
+                        <label class="flx" for="origen"><i class="fa-solid fa-magnifying-glass-location"></i></label>
+                        <input name="departure" type="text" data-code="" id="origen" placeholder="Salgo desde" required aria-required="true">
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="border-1">
+                        <label class="flx" for="destino"><i class="fa-solid fa-magnifying-glass-location"></i></label>
+                        <input name="arrival" type="text" data-code=""  id="destino" placeholder="Voy a" required aria-required="true">
+                    </div>
+                </div>
+                
+                <div class="w-25">
+                    <p class="trans-28">Fecha de salida</p>
+                    <div class="border-1 pt-4">
+                        <label class="flx" for="startDate"><i class="fa-solid fa-calendar-day"></i></label>
+                        <input class="pt-4" name="startDate" type="date" id="startDate" placeholder="12-12-2212" required aria-required="true">
+                    </div>
+                </div>
+                <div class="w-25" id="endDate-container" style="display: none;">
+                    <p class="trans-28">Fecha de retorno</p>
+                    <div class="border-1 pt-4">
+                        <label class="flx" for="endDate"><i class="fa-solid fa-calendar-day"></i></label>
+                        <input class="pt-4" name="endDate" type="date" id="endDate">
+                    </div>
+                </div>
+        
+                <div class="w-25">
+                    <p class="trans-28">Personas</p>
+                    <div class="border-1 pt-4">
+                        <label class="flx" for="cantidad"><i class="fa-solid fa-user-group"></i></label>
+                        <input class="pt-4" type="text" id="cantidad" readonly="readonly" onclick="selectCantidadPersonas()" value="Adultos: 1" required aria-required="true">
+
+                    </div>
+                </div>
+                <!-- <label for="rooms">Habitacion</label>
+                <input type="text" id="rooms" readonly="readonly"> -->
+                <div class="w-25">
+                    <select class="w-100"  name="itinerary_type" id="itinerary_type" required>
+                        <option id="one_way" value="one_way" selected>Un solo viaje</option>
+                        <option id="round_trip" value="round_trip">Ida y vuelta</option>
+                    </select>
+                </div>
+                
+                <div id="personas" style="display: none;">  
+                    <div>
+                        <label for="adultos">Adultos</label>
+                        <input name="adults" type="number" id="adultos" min="1" value="1" required aria-required="true">
+                    </div>
+                    <div>
+                        <label for="infantes">Niños</label>
+                        <input name="children" type="number" id="infantes" min="0" value="0" required aria-required="true">
+                    </div>
+                    <button type="button" onclick="divPersonasDone()">Done</button>
+                </div>
+                <button class="w-25" type="submit">Buscar</button>
+            </form>
             <div>
-                <ul  id="results"></ul>
+                <ul id="autoCom"></ul>
+            </div>
+            <div>
+                <div>
+                    <ul  id="results"></ul>
+                </div>
             </div>
         </div>
     </main>
