@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./sources/style/style_planificar.css">
+    <title>Planifica</title>
+</head>
+<body>
+    <header id="header"></header>
+    <script src="./sources/script/insert-nav.js"></script>
+    <main>
+        <h1>Arma tu paquete</h1>
+        <form autocomplete="off" id="myForm">
+            <h3>Selecciona tu destino</h3>
+    
+            <label for="origen">Salgo de</label>
+            <input name="departure" type="text" data-code="" id="origen" placeholder="ingresa una ciudad" required aria-required="true">
+            <label for="destino">Destino</label>
+            <input name="arrival" type="text" data-code=""  id="destino" placeholder="ingresa una ciudad" required aria-required="true">
+    
+            <label for="startDate">Fecha Inicio</label>
+            <input name="startDate" type="date" id="startDate" required aria-required="true">
+            <div id="endDate-container" style="display: none;">
+                <label for="endDate">Fecha Retorno</label>
+                <input name="endDate" type="date" id="endDate">
+            </div>
+    
+            <label for="cantidad">Personas</label>
+            <input type="text" id="cantidad" readonly="readonly" onclick="selectCantidadPersonas()" value="Adultos: 1" required aria-required="true">
+            <!-- <label for="rooms">Habitacion</label>
+            <input type="text" id="rooms" readonly="readonly"> -->
+            <select name="itinerary_type" id="itinerary_type" required>
+                <option id="one_way" value="one_way" selected>Un solo viaje</option>
+                <option id="round_trip" value="round_trip">Ida y vuelta</option>
+            </select>
+            
+            <div id="personas" style="display: none;">  
+                <label for="adultos">Adultos</label>
+                <input name="adults" type="number" id="adultos" min="1" value="1" required aria-required="true">
+                <label for="infantes">Niños</label>
+                <input name="children" type="number" id="infantes" min="0" value="0" required aria-required="true">
+                <button type="button" onclick="divPersonasDone()">Done</button>
+            </div>
+            <button type="submit">Buscar</button>
+        </form>
+        <div>
+            <ul id="autoCom"></ul>
+        </div>
+        <div>
+            <div>
+                <ul  id="results"></ul>
+            </div>
+        </div>
+    </main>
+    <!-- <object data="calendar.html" type="text/html" title="Calendario"></object> -->
+    <script src="sources/script/api.js"></script>
+</body>
+</html>
