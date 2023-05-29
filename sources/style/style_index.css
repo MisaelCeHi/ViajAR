@@ -1,0 +1,31 @@
+@import "./variables.css";
+
+
+/* body{
+    height: 200vh;
+} */
+
+main {
+    margin: 24px 0;
+}
+.image-container {
+    height: 200px;
+  
+
+    background-image: url(../images/thayran-melo-K_zV9qD53ZY-unsplash.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-position-y: 69%;
+    background-repeat: no-repeat;
+}
+.image-container p {
+    position: relative; 
+    top: 2.2em;
+
+    color: #fff;
+    font-size: var(--lg-xx);
+    font-weight: 900;
+    text-align: center;
+    line-height: .8em;
+}
