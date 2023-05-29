@@ -1,6 +1,6 @@
 var navigationElement = document.getElementById("header");
 
-fetch("../../nav.html")
+fetch("./nav.html")
   .then(response => response.text())
   .then(data => {
     navigationElement.innerHTML = data;
