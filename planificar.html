@@ -14,78 +14,91 @@
         <h1>Arma tu paquete</h1>
         <div class="form-container">
             <form autocomplete="off" id="myForm">
-                <div class="w-100">
+                <div class="w-100 p-12">
                     <h3>Selecciona tu destino</h3>
                 </div>
-                <div class="w-50">
-                    <div class="border-1">
-                        <label class="flx" for="origen"><i class="fa-solid fa-magnifying-glass-location"></i></label>
-                        <input name="departure" type="text" data-code="" id="origen" placeholder="Salgo desde" required aria-required="true">
+                <div class="w-100 flx p-12">
+                    <div class="w-25 itinerary_type">
+                        <label class="w-100" for="one_way">Solo ida</label>
+                        <input class="ml-12" type="radio" name="itinerary_type_opt" value="one_way" id="one_way" checked>
+                    </div>
+                    <div class="w-25 itinerary_type">
+                        <label for="round_trip">Ida y vuelta</label>
+                        <input class="ml-12" type="radio" name="itinerary_type_opt" value="round_trip" id="round_trip">
                     </div>
                 </div>
-                <div class="w-50">
-                    <div class="border-1">
-                        <label class="flx" for="destino"><i class="fa-solid fa-magnifying-glass-location"></i></label>
-                        <input name="arrival" type="text" data-code=""  id="destino" placeholder="Voy a" required aria-required="true">
+                <div class="w-50 p-12 dropdown" data-dropdown>
+                    <div class="w-100 link">
+                        <div class="border-1 grid">
+                            <label class="flx" for="origen"><i class="fa-solid fa-magnifying-glass-location"></i></label>
+                            <input name="departure" type="text" data-code="" data-dropdown-link id="origen" placeholder="Salgo desde" required aria-required="true">
+                        </div>
                     </div>
+                    <ul id="autoCom1" class="dropdown-menu pos_abs border-1"></ul>
                 </div>
+                <div class="w-50 p-12 dropdown" data-dropdown>
+                    <div class="w-100 link">
+                        <div class="border-1 grid">
+                            <label class="flx" for="destino"><i class="fa-solid fa-magnifying-glass-location"></i></label>
+                            <input name="arrival" type="text" data-code="" data-dropdown-link id="destino" placeholder="Voy a" required aria-required="true">
+                        </div>
+                    </div>  
+                    <ul id="autoCom2" class="dropdown-menu pos_abs border-1"></ul>
+                </div>
+
                 
-                <div class="w-25">
-                    <p class="trans-28">Fecha de salida</p>
-                    <div class="border-1 pt-4">
+                <div class="w-25 p-12">
+                    <p class="trans-52">Fecha de salida</p>
+                    <div class="border-1 grid pt-4">
                         <label class="flx" for="startDate"><i class="fa-solid fa-calendar-day"></i></label>
                         <input class="pt-4" name="startDate" type="date" id="startDate" placeholder="12-12-2212" required aria-required="true">
                     </div>
                 </div>
-                <div class="w-25" id="endDate-container" style="display: none;">
-                    <p class="trans-28">Fecha de retorno</p>
-                    <div class="border-1 pt-4">
+                <div class="w-25 p-12" id="endDate-container" style="display: none;">
+                    <p class="trans-52">Fecha de retorno</p>
+                    <div class="border-1 grid pt-4">
                         <label class="flx" for="endDate"><i class="fa-solid fa-calendar-day"></i></label>
                         <input class="pt-4" name="endDate" type="date" id="endDate">
                     </div>
                 </div>
-        
-                <div class="w-25">
-                    <p class="trans-28">Personas</p>
-                    <div class="border-1 pt-4">
-                        <label class="flx" for="cantidad"><i class="fa-solid fa-user-group"></i></label>
-                        <input class="pt-4" type="text" id="cantidad" readonly="readonly" onclick="selectCantidadPersonas()" value="Adultos: 1" required aria-required="true">
-
-                    </div>
-                </div>
-                <!-- <label for="rooms">Habitacion</label>
-                <input type="text" id="rooms" readonly="readonly"> -->
-                <div class="w-25">
-                    <select class="w-100"  name="itinerary_type" id="itinerary_type" required>
-                        <option id="one_way" value="one_way" selected>Un solo viaje</option>
-                        <option id="round_trip" value="round_trip">Ida y vuelta</option>
-                    </select>
-                </div>
                 
-                <div id="personas" style="display: none;">  
-                    <div>
-                        <label for="adultos">Adultos</label>
-                        <input name="adults" type="number" id="adultos" min="1" value="1" required aria-required="true">
+                <div class="w-25 p-12 dropdown" data-dropdown>
+                    <div class="link">
+                        <p class="trans-52">Personas</p>
+                        <div class="border-1 grid pt-4">
+                            <label class="flx" for="cantidad"><i class="fa-solid fa-user-group"></i></label>
+                            <input data-dropdown-link class="pt-4 w-100" type="text" id="cantidad" readonly="readonly" value="Adultos: 1" required aria-required="true">
+                        </div>
                     </div>
-                    <div>
-                        <label for="infantes">Niños</label>
-                        <input name="children" type="number" id="infantes" min="0" value="0" required aria-required="true">
+                    <div id="personas" class="dropdown-menu pos_abs border-1">  
+                        <!-- <p class=""></p> -->
+                        <div class="grid-column">
+                            <label class="p-12" for="adultos">Adultos</label>
+                            <input class="w-50 no-write" onkeydown="return false" name="adults" type="number" id="adultos" min="1" max="20" value="1" required aria-required="true">
+                        </div>
+                        <!-- <p class="">Niños</p> -->
+                        <div class="grid-column">
+                            <label class="p-12" for="infantes">Niños</label>
+                            <input class="w-50 no-write" onkeydown="return false" name="children" type="number" id="infantes" min="0" max="20" value="0" placeholder="0" required aria-required="true">
+                        </div>
+                        <div class="txt-align-center">
+                            <button class="h-28 w-100 btn-done" type="button" id="button-done">Hecho</button>
+                        </div>
                     </div>
-                    <button type="button" onclick="divPersonasDone()">Done</button>
                 </div>
-                <button class="w-25" type="submit">Buscar</button>
+                <div class="w-25 p-12 flx">
+                    <button class="w-100 p-12 btn-done border-1" type="submit">Buscar</button>
+                </div>
             </form>
-            <div>
-                <ul id="autoCom"></ul>
-            </div>
-            <div>
-                <div>
-                    <ul  id="results"></ul>
-                </div>
-            </div>
         </div>
+        <section class="results-container">
+            <div>
+                <ul  id="results"></ul>
+            </div>
+        </section>
     </main>
     <!-- <object data="calendar.html" type="text/html" title="Calendario"></object> -->
     <script src="sources/script/api.js"></script>
+    <script src="sources/script/script_form_planificar.js"></script>
 </body>
 </html>
