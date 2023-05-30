@@ -172,13 +172,23 @@ form.addEventListener("submit", (event) => {
   const formData = new FormData(form);
   const formObject = Object.fromEntries(formData.entries());
   console.log(formObject);
-  if (formObject.itinerary_type == "one_way"){
+  if (formObject.itinerary_type_opt == "one_way"){
+    console.log("one_way");
     searchFlightOneWay(
       depDate = formObject.startDate,
       destCode = arrivalAir.dataset["code"],
       oriCode=departureAir.dataset["code"],
       adults=formObject.adults,
       children=formObject.children,
+    )
+  } else if (formObject.itinerary_type_opt == "round_trip") {
+    searchFlightRoundTrip(
+      depDate = formObject.startDate,
+      retDate = formObject.endDate,
+      oriCode = departureAir.dataset["code"],
+      destCode = arrivalAir.dataset["code"],
+      adults = formObject.adults,
+      children = formObject.children,
     )
   }
   // searchFlight(
@@ -191,21 +201,7 @@ form.addEventListener("submit", (event) => {
   //   );
 });
 
-const itinerary_type = document.getElementById("itinerary_type");
-const endDate_container = document.querySelector("#endDate-container");
 
-// const itinerary_type_one_woy = document.getElementById("one_way");
-itinerary_type.addEventListener("click", (e) => {
-  if (e.target.selectedIndex) {
-    endDate_container.style.display = "block";
-    endDate_container.lastElementChild.ariaRequired = true;
-    endDate_container.lastElementChild.required = true;
-  } else {
-    endDate_container.style.display = "none";
-    endDate_container.lastElementChild.ariaRequired = false;
-    endDate_container.lastElementChild.required = false;
-  }
-});
 
 function date() {
   const currentDate = new Date();
@@ -219,14 +215,14 @@ function date() {
   calendarEndDate.min = formattedDateMax;
 }
 
-let autoComSet = document.getElementById("autoCom");
+// let autoComSet = document.getElementById("autoCom1");
 let departureAir = document.getElementById("origen");
 let arrivalAir = document.getElementById("destino");
 let calendarStartDate = document.getElementById("startDate");
 let calendarEndDate = document.getElementById("endDate");
 
 let cantidadPersonas = document.getElementById("cantidad");
-let divPersonas = document.getElementById("personas");
+
 let cantidadAdultos = document.getElementById("adultos");
 let cantidadInfante = document.getElementById("infantes");
 
@@ -244,9 +240,12 @@ inputOrigen.addEventListener("input", () => {
     console.log("----");
     const value = inputOrigen.value;
     const tagId = inputOrigen.id;
-    autoComSet.style.display = "block";
+    const ulComp = document.getElementById("autoCom1");
     if (value.length > 2) {
-      getLocation(value, tagId);
+      // ulComp.style.display = "block";
+      getLocation(value, tagId, ulComp);
+    } else{
+      ulComp.style.display = "none";
     }
   }, 500);
 });
@@ -257,25 +256,14 @@ inputDestino.addEventListener("input", () => {
     console.log("----");
     const value = inputDestino.value;
     const tagId = inputDestino.id;
-    autoComSet.style.display = "block";
+    const ulComp = document.getElementById("autoCom2");
     if (value.length > 2) {
-      getLocation(value, tagId);
+      getLocation(value, tagId, ulComp);
     }
   }, 600);
 });
 
-function selectCantidadPersonas() {
-  divPersonas.style.display = "block";
-}
 
-function divPersonasDone() {
-  let totalAdultos = cantidadAdultos.value;
-  let totalInfante = cantidadInfante.value;
-  cantidadPersonas.value = `Adultos: ${totalAdultos}${
-    totalInfante != 0 ? " - Niños: " + totalInfante : ""
-  }`;
-  divPersonas.style.display = "none";
-}
 
 // Get country name
 async function getCountry(id) {
@@ -303,11 +291,14 @@ function getOrigin(event, tagId) {
   let tag = document.getElementById(tagId);
   tag.value = event.target.innerText;
   tag.dataset["code"] = event.target.dataset["code"];
-  autoComSet.style.display = "none";
+  event.target.parentElement.parentElement.classList.remove("active")
+  console.log(event);
 }
 
 // Search Locations
-async function getLocation(value, tag) {
+async function getLocation(value, tag, ul) {
+  ul.style.display = "block";
+
   const url = `https://priceline-com-provider.p.rapidapi.com/v2/flight/autoComplete?string=${value}&regions=true&spellcheck=true&airports=true&cities=true&pois=true&hotels=true`;
   const options = {
     method: "GET",
@@ -322,9 +313,9 @@ async function getLocation(value, tag) {
     let similitudes = result.getAirAutoComplete.results.getSolr.results;
     if (similitudes.status_code == 100) {
       if (!similitudes.data) {
-        autoComSet.innerText = "No matching results found.";
+        ul.innerText = "No matching results found.";
       } else {
-        autoComSet.innerText = "";
+        ul.innerText = "";
         if (similitudes.data.airport_data) {
           // console.log(similitudes.data);
           let aeropuertos = similitudes.data.airport_data;
@@ -333,7 +324,7 @@ async function getLocation(value, tag) {
             let ciudad = aeropuertos[aeropuerto].city;
             let iata = aeropuertos[aeropuerto].iata;
             let codigoPais = aeropuertos[aeropuerto].country_code;
-            autoComSet.innerHTML += `<li data-code="${iata}" onclick="getOrigin(event, '${tag}')">${ciudad}, ${codigoPais} - ${nombreAeropuerto} (${iata})</li> <br>`;
+            ul.innerHTML += `<li data-code="${iata}" onclick="getOrigin(event, '${tag}')">${ciudad}, ${codigoPais} - ${nombreAeropuerto} (${iata})</li> <br>`;
           }
         }
         // if (similitudes.data.city_data) {
@@ -343,12 +334,12 @@ async function getLocation(value, tag) {
         //     let cityID = ciudades[ciudad].id;
         //     let nombrePais = ciudades[ciudad].country;
         //     let codigoPais = ciudades[ciudad].country_code;
-        //     autoComSet.innerHTML += `<li data-code="${cityID}" onclick="getOrigin(event, '${tag}')">${nombre}, ${nombrePais} - ${codigoPais}</li> <br>`;
+        //     ul.innerHTML += `<li data-code="${cityID}" onclick="getOrigin(event, '${tag}')">${nombre}, ${nombrePais} - ${codigoPais}</li> <br>`;
         //   }
         // }
       }
     } else if (similitudes.status_code == 500) {
-      autoComSet.innerText = "No matching results found.";
+      ul.innerText = "No matching results found.";
     }
   } catch (error) {
     console.error(error);
